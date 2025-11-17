@@ -22,6 +22,14 @@ A modular, TypeScript-based microservice for managing customer data using Expres
 
 ## 📦 Setup
 
+To configure your local environment:
+
+1. Copy `.env.example` to `.env` manually  
+   _or_ run the setup script:
+
+   ```bash
+   npm run setup
+
 ```bash
 npm install
 npx prisma generate
