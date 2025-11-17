@@ -14,3 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Soft delete functionality
 - Modular filter utility and validator layer
 - Clean `.gitignore`, `README.md`, `.env.example`, and `CONTRIBUTING.md`
+
+## [0.1.1] - 2025-11-17
+### Added
+- Swagger export pipeline using `@asteasolutions/zod-to-openapi@8.1.0`
+- `customerSchema` with `.openapi()` metadata for all fields
+- `openapi.ts` for OpenAPI document generation
+- `exportOpenApi.ts` script to output versioned YAML spec
+- `docs/customer-service-v1.0.0.yaml` as first exported spec
+
+### Changed
+- Refactored `customerValidator.ts` to remove deprecated Zod options (`required_error`, `errorMap`)
+- Replaced legacy `zod-to-openapi` usage with scoped package
