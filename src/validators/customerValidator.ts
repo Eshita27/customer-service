@@ -11,7 +11,7 @@ export const customerSchema = z.object({
   email: z.string().email().openapi({ example: 'eshita@example.com' }),
   phone: z.string().optional().openapi({ example: '+91-9876543210' }),
   dob: z.string().optional().openapi({ example: '1995-08-15' }),
-  gender: z.enum(['male', 'female', 'other']).optional().openapi({ example: 'female' }),
+  gender: z.nativeEnum(Gender).optional().default(Gender.MALE).openapi({ example: 'FEMALE' }),
   channel: z.nativeEnum(Channel).optional().default(Channel.UNKNOWN).openapi({ example: 'B2C' }),
   companyName: z.string().optional().openapi({ example: 'BURHASTHCHS' }),
   contactPerson: z.string().optional().openapi({ example: 'Eshita Chakraborty' }),

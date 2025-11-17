@@ -14,7 +14,7 @@ model Customer {
   email           String   @unique
   phone           String?
   dob             DateTime?
-  gender          String?
+  gender          Gender   @default(MALE)
   channel         Channel  @default(UNKNOWN)
   companyName     String?
   contactPerson   String?
@@ -37,4 +37,10 @@ enum Tier {
   BASIC
   PREMIUM
   ENTERPRISE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
 }
