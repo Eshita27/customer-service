@@ -1,10 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { buildCustomerFilters } from '../utils/buildCustomerFilters';
-import { customerSchema } from '../validators/customerValidator';
-import { updateCustomerSchema } from '../validators/customerValidator';
-
-const prisma = new PrismaClient();
+import { customerSchema, updateCustomerSchema } from '../validators/customerValidator';
+import { createCustomer, updateCustomer } from '../services/customerService';
 
 export const getCustomers = async (req: Request, res: Response) => {
   try {
@@ -17,50 +14,37 @@ export const getCustomers = async (req: Request, res: Response) => {
 };
 
 
-export const createCustomer = async (req: Request, res: Response) => {
+export const createCustomerHandler = async (req: Request, res: Response) => {
   try {
     const parsed = customerSchema.safeParse(req.body);
 
     if (!parsed.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: parsed.error.flatten().fieldErrors
+        details: parsed.error.flatten().fieldErrors,
       });
     }
 
-    const customer = await prisma.customer.create({
-      data: {
-        ...parsed.data,
-        dob: parsed.data.dob ? new Date(parsed.data.dob) : undefined
-      }
-    });
-
+    const customer = await createCustomer(parsed.data);
     res.status(201).json(customer);
   } catch (err) {
     res.status(400).json({ error: 'Error creating customer' });
   }
 };
 
-export const updateCustomer = async (req: Request, res: Response) => {
+export const updateCustomerHandler = async (req: Request, res: Response) => {
   try {
     const parsed = updateCustomerSchema.safeParse(req.body);
 
     if (!parsed.success) {
       return res.status(400).json({
         error: 'Validation failed',
-        details: parsed.error.flatten().fieldErrors
+        details: parsed.error.flatten().fieldErrors,
       });
     }
 
-    const customer = await prisma.customer.update({
-      where: { id: req.params.id },
-      data: {
-        ...parsed.data,
-        dob: parsed.data.dob ? new Date(parsed.data.dob) : undefined
-      }
-    });
-
-    res.json(customer);
+    const customer = await updateCustomer(req.params.id, parsed.data);
+    res.status(200).json(customer);
   } catch (err) {
     res.status(400).json({ error: 'Error updating customer' });
   }
