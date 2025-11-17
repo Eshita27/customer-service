@@ -1,24 +1,24 @@
 import { z } from 'zod';
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'; // ✅ Add this
 import { Channel, Tier } from '@prisma/client';
 
+extendZodWithOpenApi(z); // ✅ Call this before using .openapi()
+
+
 export const customerSchema = z.object({
-  firstName: z.string({ required_error: 'First name is required' }),
-  lastName: z.string({ required_error: 'Last name is required' }),
-  email: z.string({ required_error: 'Email is required' }).email('Invalid email format'),
-  phone: z.string().optional(),
-  dob: z.string().optional(), // ISO string
-  gender: z.enum(['male', 'female', 'other']).optional(),
-  channel: z.nativeEnum(Channel, {
-    errorMap: () => ({ message: 'Channel must be one of B2B, B2C, HYBRID, or UNKNOWN' })
-  }).optional().default(Channel.UNKNOWN),
-  companyName: z.string().optional(),
-  contactPerson: z.string().optional(),
-  customerTier: z.nativeEnum(Tier, {
-    errorMap: () => ({ message: 'Tier must be one of BASIC, PREMIUM, or ELITE' })
-  }).optional().default(Tier.BASIC),
-  communication: z.string().optional().default('email'),
-  favoriteFlavors: z.array(z.string()).optional(),
-  isActive: z.boolean().optional().default(true)
+  firstName: z.string().openapi({ example: 'Eshita' }),
+  lastName: z.string().openapi({ example: 'Chakraborty' }),
+  email: z.string().email().openapi({ example: 'eshita@example.com' }),
+  phone: z.string().optional().openapi({ example: '+91-9876543210' }),
+  dob: z.string().optional().openapi({ example: '1995-08-15' }),
+  gender: z.enum(['male', 'female', 'other']).optional().openapi({ example: 'female' }),
+  channel: z.nativeEnum(Channel).optional().default(Channel.UNKNOWN).openapi({ example: 'B2C' }),
+  companyName: z.string().optional().openapi({ example: 'BURHASTHCHS' }),
+  contactPerson: z.string().optional().openapi({ example: 'Eshita Chakraborty' }),
+  customerTier: z.nativeEnum(Tier).optional().default(Tier.BASIC).openapi({ example: 'PREMIUM' }),
+  communication: z.string().optional().default('email').openapi({ example: 'email' }),
+  favoriteFlavors: z.array(z.string()).optional().openapi({ example: ['vanilla', 'mango'] }),
+  isActive: z.boolean().optional().default(true).openapi({ example: true }),
 });
 
 export const updateCustomerSchema = customerSchema.partial().refine(
