@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'; // ✅ Add this
-import { Channel, Tier } from '@prisma/client';
+import { Channel, Tier, Gender } from '@prisma/client';
 
 extendZodWithOpenApi(z); // ✅ Call this before using .openapi()
 
@@ -24,4 +24,4 @@ export const customerSchema = z.object({
 export const updateCustomerSchema = customerSchema.partial().refine(
   data => Object.keys(data).length > 0,
   { message: 'At least one field must be provided for update' }
-);
+).openapi('UpdateCustomer');

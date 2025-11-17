@@ -3,8 +3,14 @@ import path from 'path';
 import yaml from 'yaml';
 import { openApiDocument } from '../config/openapi';
 
-const outputPath = path.join(__dirname, '../../docs/customer-service-v1.0.0.yaml');
-const yamlContent = yaml.stringify(openApiDocument);
+const version = 'v1.0.0';
+const outputDir = path.join(__dirname, `../../specs/${version}`);
+fs.mkdirSync(outputDir, { recursive: true });
 
-fs.writeFileSync(outputPath, yamlContent);
-console.log(`✅ OpenAPI spec exported to ${outputPath}`);
+const yamlContent = yaml.stringify(openApiDocument);
+const jsonContent = JSON.stringify(openApiDocument, null, 2);
+
+fs.writeFileSync(path.join(outputDir, 'openapi.yaml'), yamlContent);
+fs.writeFileSync(path.join(outputDir, 'openapi.json'), jsonContent);
+
+console.log(`✅ OpenAPI spec exported to /specs/${version}/`);
