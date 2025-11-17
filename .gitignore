@@ -1,0 +1,26 @@
+# Node.js
+node_modules/
+dist/
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Prisma artifacts
+prisma/generated/
+prisma/migrations/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker (optional, if you add Docker later)
+Dockerfile
+docker-compose.yml
+*.dockerignore

@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id              String   @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String   @unique
+  phone           String?
+  dob             DateTime?
+  gender          String?
+  channel         Channel  @default(UNKNOWN)
+  companyName     String?
+  contactPerson   String?
+  customerTier    Tier     @default(BASIC)
+  communication   String   @default("email")
+  favoriteFlavors String[]
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum Channel {
+  B2B
+  B2C
+  HYBRID
+  UNKNOWN
+}
+
+enum Tier {
+  BASIC
+  PREMIUM
+  ENTERPRISE
+}
