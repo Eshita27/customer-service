@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: Customer Service API
+  version: 0.1.0
+  description: Auto-generated OpenAPI spec from Zod schemas
+servers:
+  - url: http://localhost:3000
+    description: Local dev server
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Eshita
+        lastName:
+          type: string
+          example: Chakraborty
+        email:
+          type: string
+          format: email
+          example: eshita@example.com
+        phone:
+          type: string
+          example: +91-9876543210
+        dob:
+          type: string
+          example: 1995-08-15
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+          default: MALE
+          example: FEMALE
+        channel:
+          type: string
+          enum:
+            - B2B
+            - B2C
+            - HYBRID
+            - UNKNOWN
+          default: UNKNOWN
+          example: B2C
+        companyName:
+          type: string
+          example: BURHASTHCHS
+        contactPerson:
+          type: string
+          example: Eshita Chakraborty
+        customerTier:
+          type: string
+          enum:
+            - BASIC
+            - PREMIUM
+            - ENTERPRISE
+          default: BASIC
+          example: PREMIUM
+        communication:
+          type: string
+          default: email
+          example: email
+        favoriteFlavors:
+          type: array
+          items:
+            type: string
+          example:
+            - vanilla
+            - mango
+        isActive:
+          type: boolean
+          default: true
+          example: true
+      required:
+        - firstName
+        - lastName
+        - email
+  parameters: {}
+paths: {}
