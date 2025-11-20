@@ -5,10 +5,11 @@ Thanks for your interest in contributing! Here's how to get started:
 ## 🧭 Project Setup
 
 1. Clone the repo
-2. Run `npm install`
-3. Run `npm run setup` to auto-copy `.env.example` to `.env`
-4. Fill in your credentials in `.env`
-5. Run `npx prisma generate` and `npm run dev`
+2. cd customer-service
+3. Run `npm install`
+4. Run `npm run setup` to auto-copy `.env.example` to `.env`
+5. Fill in your credentials in `.env`
+6. Run `npx prisma generate` and `npm run dev`
 
 ## 🧪 Testing Your Changes
 
@@ -22,6 +23,24 @@ Thanks for your interest in contributing! Here's how to get started:
 - Keep controllers lean — move logic to `services/`
 - Use `validators/` for all input validation
 - Follow RESTful conventions
+
+## 🔄 Export the OpenAPI Spec
+
+- VERSION=v1.0.0 npm run export:openapi
+
+## 🔍 Preview with Swagger UI
+
+- npm run preview:swagger
+  (Then open http://localhost:8000 in your browser.)
+
+## 🧪 Validate the Spec (Optional)
+
+- npx swagger-cli validate specs/v1.0.0/openapi.yaml
+
+## 📘 Redoc Preview (Optional)
+
+- npx redoc-cli serve specs/v1.0.0/openapi.yaml
+
 
 ## 📦 Branching
 
