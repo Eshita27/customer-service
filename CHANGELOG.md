@@ -26,3 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Refactored `customerValidator.ts` to remove deprecated Zod options (`required_error`, `errorMap`)
 - Replaced legacy `zod-to-openapi` usage with scoped package
+
+## [v1.0.0] - 2025-11-20
+
+### Added
+- Initial Swagger spec export for Customer Service API
+- Includes enums: Gender, Tier, Channel
+- Public schema: Customer
+- Routes: createCustomer, getCustomerById, listCustomers
+
+- name: Update changelog
+  run: |
+  echo "## [${{ github.ref_name }}] - $(date +'%Y-%m-%d')" >> CHANGELOG.md
+  echo "- Swagger spec exported to specs/${{ github.ref_name }}" >> CHANGELOG.md
