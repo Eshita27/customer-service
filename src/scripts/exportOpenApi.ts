@@ -13,4 +13,5 @@ const jsonContent = JSON.stringify(openApiDocument, null, 2);
 fs.writeFileSync(path.join(outputDir, 'openapi.yaml'), yamlContent);
 fs.writeFileSync(path.join(outputDir, 'openapi.json'), jsonContent);
 
+console.log('Paths:', Object.keys(openApiDocument.paths));
 console.log(`✅ OpenAPI spec exported to /specs/${version}/`);
