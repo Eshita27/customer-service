@@ -3,7 +3,7 @@ import path from 'path';
 import yaml from 'yaml';
 import { openApiDocument } from '../config/openapi';
 
-const version = 'v1.0.0';
+const version = process.env.VERSION || 'v1.0.0';
 const outputDir = path.join(__dirname, `../../specs/${version}`);
 fs.mkdirSync(outputDir, { recursive: true });
 
