@@ -38,19 +38,18 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt install gh -y
 
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Commit and push spec
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "Swagger Bot"
           git config user.email "swagger-bot@yourdomain.com"
           git add specs/${{ github.ref_name }}
           git commit -m "🔄 Auto-export Swagger spec for v1.0.0" || echo "No changes to commit"
-
-          # Inject token into Git credentials
-          git config credential.helper store
-          echo "https://x-access-token:${GH_PAT}@github.com" > ~/.git-credentials
-
-          # Push using updated credentials
-          git push https://github.com/Eshita27/customer-service.git HEAD:main
+          git push git@github.com:Eshita27/customer-service.git HEAD:main
       
