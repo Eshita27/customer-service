@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/index.ts",
-    "export:openapi": "ts-node src/scripts/exportOpenApi.ts"
+    "export:openapi": "ts-node src/scripts/exportOpenApi.ts",
+    "preview:swagger": "swagger-ui-watcher specs/v1.0.0/openapi.yaml"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "@types/node": "^24.10.1",
     "prisma": "^6.19.0",
     "swagger-cli": "^4.0.4",
+    "swagger-ui-watcher": "^2.1.14",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }

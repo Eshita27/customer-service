@@ -1,10 +1,127 @@
 import { OpenAPIRegistry, OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 import { customerSchema } from '../validators/customerValidator';
+import { z } from 'zod';
 
 const registry = new OpenAPIRegistry();
 
 // Register your schema
 registry.register('Customer', customerSchema);
+
+// Register operations
+registry.registerPath({
+  method: 'get',
+  path: '/api/v1/customers',
+  summary: 'Get all customers',
+  responses: {
+    200: {
+      description: 'List of customers',
+      content: {
+        'application/json': {
+          schema: z.array(customerSchema),
+        },
+      },
+    },
+  },
+});
+
+registry.registerPath({
+  method: 'post',
+  path: '/api/v1/customers',
+  summary: 'Create a new customer',
+  request: {
+    body: {
+      content: {
+        'application/json': {
+          schema: customerSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    201: {
+      description: 'Customer created successfully',
+      content: {
+        'application/json': {
+          schema: customerSchema,
+        },
+      },
+    },
+  },
+});
+
+registry.registerPath({
+  method: 'put',
+  path: '/api/v1/customers/{id}',
+  summary: 'Update an existing customer',
+  request: {
+    params: z.object({
+      id: z.string().uuid(),
+    }),
+    body: {
+      content: {
+        'application/json': {
+          schema: customerSchema,
+        },
+      },
+    },
+  },
+  responses: {
+    200: {
+      description: 'Customer updated successfully',
+      content: {
+        'application/json': {
+          schema: customerSchema,
+        },
+      },
+    },
+    400: {
+      description: 'Validation error',
+    },
+  },
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/api/v1/customers/{id}',
+  summary: 'Get customer by ID',
+  request: {
+    params: z.object({
+      id: z.string().uuid(),
+    }),
+  },
+  responses: {
+    200: {
+      description: 'Customer details',
+      content: {
+        'application/json': {
+          schema: customerSchema,
+        },
+      },
+    },
+    404: {
+      description: 'Customer not found',
+    },
+  },
+});
+
+registry.registerPath({
+  method: 'delete',
+  path: '/api/v1/customers/{id}',
+  summary: 'Soft delete a customer',
+  request: {
+    params: z.object({
+      id: z.string().uuid(),
+    }),
+  },
+  responses: {
+    200: {
+      description: 'Customer deactivated successfully',
+    },
+    404: {
+      description: 'Customer not found',
+    },
+  },
+});
 
 // Create the generator
 const generator = new OpenApiGeneratorV3(registry.definitions);
@@ -14,7 +131,7 @@ export const openApiDocument = generator.generateDocument({
   openapi: '3.0.0',
   info: {
     title: 'Customer Service API',
-    version: '0.1.0',
+    version: process.env.VERSION || 'v1.0.0',
     description: 'Auto-generated OpenAPI spec from Zod schemas',
   },
   servers: [
