@@ -152,7 +152,7 @@ console.log('Registered path: DELETE /api/v1/customers/{id}');
   console.error('❌ Failed to register DELETE /api/v1/customers/{id}:', error);
 }
 
-console.log('Registered paths:', Object.keys(registry.definitions.paths || {}));
+console.log('Definitions count:', registry.definitions.length);
 
 // Create the generator
 const generator = new OpenApiGeneratorV3(registry.definitions);
