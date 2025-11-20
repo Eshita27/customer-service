@@ -2,9 +2,11 @@ name: Swagger Export
 
 on:
   push:
-    branches: [main]
-  tags:
-    - 'v*'
+    branches:
+      - main
+  create:
+    tags:
+      - v*
 
 jobs:
   export-swagger:
@@ -30,7 +32,7 @@ jobs:
           git config user.name "Swagger Bot"
           git config user.email "swagger-bot@yourdomain.com"
           git add specs/v1.0.0
-          git commit -m "🔄 Auto-export Swagger spec for v1.0.0"
-          git push
+          git commit -m "🔄 Auto-export Swagger spec for v1.0.0" || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
