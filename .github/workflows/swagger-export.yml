@@ -46,5 +46,11 @@ jobs:
           git config user.email "swagger-bot@yourdomain.com"
           git add specs/${{ github.ref_name }}
           git commit -m "🔄 Auto-export Swagger spec for v1.0.0" || echo "No changes to commit"
-          echo "${GH_PAT}" | gh auth login --with-token
-          git push origin HEAD
+
+          # Inject token into Git credentials
+          git config credential.helper store
+          echo "https://x-access-token:${GH_PAT}@github.com" > ~/.git-credentials
+
+          # Push using updated credentials
+          git push https://github.com/Eshita27/customer-service.git HEAD:main
+      
