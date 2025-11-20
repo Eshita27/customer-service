@@ -8,6 +8,8 @@ const registry = new OpenAPIRegistry();
 registry.register('Customer', customerSchema);
 
 // Register operations
+try
+{
 registry.registerPath({
   method: 'get',
   path: '/api/v1/customers',
@@ -23,7 +25,13 @@ registry.registerPath({
     },
   },
 });
+console.log('Registered path: GET /api/v1/customers');
+}
+catch (error) {
+  console.error('❌ Failed to register GET /api/v1/customers:', error);
+}
 
+try {
 registry.registerPath({
   method: 'post',
   path: '/api/v1/customers',
@@ -48,7 +56,13 @@ registry.registerPath({
     },
   },
 });
+console.log('Registered path: POST /api/v1/customers');
+} catch (error) {
+  console.error('❌ Failed to register POST /api/v1/customers:', error);
+}
 
+try
+{
 registry.registerPath({
   method: 'put',
   path: '/api/v1/customers/{id}',
@@ -79,7 +93,12 @@ registry.registerPath({
     },
   },
 });
+console.log('Registered path: PUT /api/v1/customers/{id}');
+} catch (error) {
+  console.error('❌ Failed to register PUT /api/v1/customers/{id}:', error);
+}
 
+try{
 registry.registerPath({
   method: 'get',
   path: '/api/v1/customers/{id}',
@@ -103,7 +122,13 @@ registry.registerPath({
     },
   },
 });
+console.log('Registered path: GET /api/v1/customers/{id}');
+} catch (error) {
+  console.error('❌ Failed to register GET /api/v1/customers/{id}:', error);
+}
 
+try
+{
 registry.registerPath({
   method: 'delete',
   path: '/api/v1/customers/{id}',
@@ -122,6 +147,12 @@ registry.registerPath({
     },
   },
 });
+console.log('Registered path: DELETE /api/v1/customers/{id}');
+} catch (error) {
+  console.error('❌ Failed to register DELETE /api/v1/customers/{id}:', error);
+}
+
+console.log('Registered paths:', Object.keys(registry.definitions.paths || {}));
 
 // Create the generator
 const generator = new OpenApiGeneratorV3(registry.definitions);
