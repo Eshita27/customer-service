@@ -24,3 +24,6 @@ Thumbs.db
 Dockerfile
 docker-compose.yml
 *.dockerignore
+
+# Ignore Redoc builds except versioned ones
+!docs/**/redoc-static.html
