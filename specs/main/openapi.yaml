@@ -1,0 +1,553 @@
+openapi: 3.0.0
+info:
+  title: Customer Service API
+  version: main
+  description: Auto-generated OpenAPI spec from Zod schemas
+servers:
+  - url: http://localhost:3000
+    description: Local dev server
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: Eshita
+        lastName:
+          type: string
+          example: Chakraborty
+        email:
+          type: string
+          format: email
+          example: eshita@example.com
+        phone:
+          type: string
+          example: +91-9876543210
+        dob:
+          type: string
+          example: 1995-08-15
+        gender:
+          type: string
+          enum:
+            - MALE
+            - FEMALE
+            - OTHER
+          default: MALE
+          example: FEMALE
+        channel:
+          type: string
+          enum:
+            - B2B
+            - B2C
+            - HYBRID
+            - UNKNOWN
+          default: UNKNOWN
+          example: B2C
+        companyName:
+          type: string
+          example: BURHASTHCHS
+        contactPerson:
+          type: string
+          example: Eshita Chakraborty
+        customerTier:
+          type: string
+          enum:
+            - BASIC
+            - PREMIUM
+            - ENTERPRISE
+          default: BASIC
+          example: PREMIUM
+        communication:
+          type: string
+          default: email
+          example: email
+        favoriteFlavors:
+          type: array
+          items:
+            type: string
+          example: &a1
+            - vanilla
+            - mango
+        isActive:
+          type: boolean
+          default: true
+          example: true
+      required:
+        - firstName
+        - lastName
+        - email
+  parameters: {}
+paths:
+  /api/v1/customers:
+    get:
+      summary: Get all customers
+      responses:
+        "200":
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    firstName:
+                      type: string
+                      example: Eshita
+                    lastName:
+                      type: string
+                      example: Chakraborty
+                    email:
+                      type: string
+                      format: email
+                      example: eshita@example.com
+                    phone:
+                      type: string
+                      example: +91-9876543210
+                    dob:
+                      type: string
+                      example: 1995-08-15
+                    gender:
+                      type: string
+                      enum:
+                        - MALE
+                        - FEMALE
+                        - OTHER
+                      default: MALE
+                      example: FEMALE
+                    channel:
+                      type: string
+                      enum:
+                        - B2B
+                        - B2C
+                        - HYBRID
+                        - UNKNOWN
+                      default: UNKNOWN
+                      example: B2C
+                    companyName:
+                      type: string
+                      example: BURHASTHCHS
+                    contactPerson:
+                      type: string
+                      example: Eshita Chakraborty
+                    customerTier:
+                      type: string
+                      enum:
+                        - BASIC
+                        - PREMIUM
+                        - ENTERPRISE
+                      default: BASIC
+                      example: PREMIUM
+                    communication:
+                      type: string
+                      default: email
+                      example: email
+                    favoriteFlavors:
+                      type: array
+                      items:
+                        type: string
+                      example: *a1
+                    isActive:
+                      type: boolean
+                      default: true
+                      example: true
+                  required:
+                    - firstName
+                    - lastName
+                    - email
+    post:
+      summary: Create a new customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: Eshita
+                lastName:
+                  type: string
+                  example: Chakraborty
+                email:
+                  type: string
+                  format: email
+                  example: eshita@example.com
+                phone:
+                  type: string
+                  example: +91-9876543210
+                dob:
+                  type: string
+                  example: 1995-08-15
+                gender:
+                  type: string
+                  enum:
+                    - MALE
+                    - FEMALE
+                    - OTHER
+                  default: MALE
+                  example: FEMALE
+                channel:
+                  type: string
+                  enum:
+                    - B2B
+                    - B2C
+                    - HYBRID
+                    - UNKNOWN
+                  default: UNKNOWN
+                  example: B2C
+                companyName:
+                  type: string
+                  example: BURHASTHCHS
+                contactPerson:
+                  type: string
+                  example: Eshita Chakraborty
+                customerTier:
+                  type: string
+                  enum:
+                    - BASIC
+                    - PREMIUM
+                    - ENTERPRISE
+                  default: BASIC
+                  example: PREMIUM
+                communication:
+                  type: string
+                  default: email
+                  example: email
+                favoriteFlavors:
+                  type: array
+                  items:
+                    type: string
+                  example: *a1
+                isActive:
+                  type: boolean
+                  default: true
+                  example: true
+              required:
+                - firstName
+                - lastName
+                - email
+      responses:
+        "201":
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  firstName:
+                    type: string
+                    example: Eshita
+                  lastName:
+                    type: string
+                    example: Chakraborty
+                  email:
+                    type: string
+                    format: email
+                    example: eshita@example.com
+                  phone:
+                    type: string
+                    example: +91-9876543210
+                  dob:
+                    type: string
+                    example: 1995-08-15
+                  gender:
+                    type: string
+                    enum:
+                      - MALE
+                      - FEMALE
+                      - OTHER
+                    default: MALE
+                    example: FEMALE
+                  channel:
+                    type: string
+                    enum:
+                      - B2B
+                      - B2C
+                      - HYBRID
+                      - UNKNOWN
+                    default: UNKNOWN
+                    example: B2C
+                  companyName:
+                    type: string
+                    example: BURHASTHCHS
+                  contactPerson:
+                    type: string
+                    example: Eshita Chakraborty
+                  customerTier:
+                    type: string
+                    enum:
+                      - BASIC
+                      - PREMIUM
+                      - ENTERPRISE
+                    default: BASIC
+                    example: PREMIUM
+                  communication:
+                    type: string
+                    default: email
+                    example: email
+                  favoriteFlavors:
+                    type: array
+                    items:
+                      type: string
+                    example: *a1
+                  isActive:
+                    type: boolean
+                    default: true
+                    example: true
+                required:
+                  - firstName
+                  - lastName
+                  - email
+  /api/v1/customers/{id}:
+    put:
+      summary: Update an existing customer
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          required: true
+          name: id
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  example: Eshita
+                lastName:
+                  type: string
+                  example: Chakraborty
+                email:
+                  type: string
+                  format: email
+                  example: eshita@example.com
+                phone:
+                  type: string
+                  example: +91-9876543210
+                dob:
+                  type: string
+                  example: 1995-08-15
+                gender:
+                  type: string
+                  enum:
+                    - MALE
+                    - FEMALE
+                    - OTHER
+                  default: MALE
+                  example: FEMALE
+                channel:
+                  type: string
+                  enum:
+                    - B2B
+                    - B2C
+                    - HYBRID
+                    - UNKNOWN
+                  default: UNKNOWN
+                  example: B2C
+                companyName:
+                  type: string
+                  example: BURHASTHCHS
+                contactPerson:
+                  type: string
+                  example: Eshita Chakraborty
+                customerTier:
+                  type: string
+                  enum:
+                    - BASIC
+                    - PREMIUM
+                    - ENTERPRISE
+                  default: BASIC
+                  example: PREMIUM
+                communication:
+                  type: string
+                  default: email
+                  example: email
+                favoriteFlavors:
+                  type: array
+                  items:
+                    type: string
+                  example: *a1
+                isActive:
+                  type: boolean
+                  default: true
+                  example: true
+              required:
+                - firstName
+                - lastName
+                - email
+      responses:
+        "200":
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  firstName:
+                    type: string
+                    example: Eshita
+                  lastName:
+                    type: string
+                    example: Chakraborty
+                  email:
+                    type: string
+                    format: email
+                    example: eshita@example.com
+                  phone:
+                    type: string
+                    example: +91-9876543210
+                  dob:
+                    type: string
+                    example: 1995-08-15
+                  gender:
+                    type: string
+                    enum:
+                      - MALE
+                      - FEMALE
+                      - OTHER
+                    default: MALE
+                    example: FEMALE
+                  channel:
+                    type: string
+                    enum:
+                      - B2B
+                      - B2C
+                      - HYBRID
+                      - UNKNOWN
+                    default: UNKNOWN
+                    example: B2C
+                  companyName:
+                    type: string
+                    example: BURHASTHCHS
+                  contactPerson:
+                    type: string
+                    example: Eshita Chakraborty
+                  customerTier:
+                    type: string
+                    enum:
+                      - BASIC
+                      - PREMIUM
+                      - ENTERPRISE
+                    default: BASIC
+                    example: PREMIUM
+                  communication:
+                    type: string
+                    default: email
+                    example: email
+                  favoriteFlavors:
+                    type: array
+                    items:
+                      type: string
+                    example: *a1
+                  isActive:
+                    type: boolean
+                    default: true
+                    example: true
+                required:
+                  - firstName
+                  - lastName
+                  - email
+        "400":
+          description: Validation error
+    get:
+      summary: Get customer by ID
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          required: true
+          name: id
+          in: path
+      responses:
+        "200":
+          description: Customer details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  firstName:
+                    type: string
+                    example: Eshita
+                  lastName:
+                    type: string
+                    example: Chakraborty
+                  email:
+                    type: string
+                    format: email
+                    example: eshita@example.com
+                  phone:
+                    type: string
+                    example: +91-9876543210
+                  dob:
+                    type: string
+                    example: 1995-08-15
+                  gender:
+                    type: string
+                    enum:
+                      - MALE
+                      - FEMALE
+                      - OTHER
+                    default: MALE
+                    example: FEMALE
+                  channel:
+                    type: string
+                    enum:
+                      - B2B
+                      - B2C
+                      - HYBRID
+                      - UNKNOWN
+                    default: UNKNOWN
+                    example: B2C
+                  companyName:
+                    type: string
+                    example: BURHASTHCHS
+                  contactPerson:
+                    type: string
+                    example: Eshita Chakraborty
+                  customerTier:
+                    type: string
+                    enum:
+                      - BASIC
+                      - PREMIUM
+                      - ENTERPRISE
+                    default: BASIC
+                    example: PREMIUM
+                  communication:
+                    type: string
+                    default: email
+                    example: email
+                  favoriteFlavors:
+                    type: array
+                    items:
+                      type: string
+                    example: *a1
+                  isActive:
+                    type: boolean
+                    default: true
+                    example: true
+                required:
+                  - firstName
+                  - lastName
+                  - email
+        "404":
+          description: Customer not found
+    delete:
+      summary: Soft delete a customer
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          required: true
+          name: id
+          in: path
+      responses:
+        "200":
+          description: Customer deactivated successfully
+        "404":
+          description: Customer not found
