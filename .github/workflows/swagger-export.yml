@@ -32,6 +32,10 @@ jobs:
       - name: Generate Swagger spec
         run: VERSION=${{ github.ref_name }} npm run export:openapi
 
+      - name: Generate Redoc HTML
+        run: |
+              npx redoc-cli bundle specs/${{ github.ref_name }}/openapi.yaml -o docs/${{ github.ref_name }}/redoc-static.html
+
       - name: Validate Swagger spec
         run: npx swagger-cli validate specs/v1.0.0/openapi.yaml
 
